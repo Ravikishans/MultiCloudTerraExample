@@ -18,12 +18,12 @@ resource "azurerm_subnet" "example" {
 }
 
 # Public IP creation for VM
-resource "azurerm_public_ip" "example" {
-  name                = "example-public-ip"
-  location            = var.location
-  resource_group_name = var.resource_group_name 
-  allocation_method   = "Dynamic"
-}
+# resource "azurerm_public_ip" "example" {
+#   name                = "example-public-ip"
+#   location            = var.location
+#   resource_group_name = var.resource_group_name 
+#   allocation_method   = "Dynamic"
+# }
 
 resource "azurerm_network_interface" "example" {
   name                = "example-nic"
@@ -34,7 +34,7 @@ resource "azurerm_network_interface" "example" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id         = azurerm_public_ip.example.id
+    # public_ip_address_id         = azurerm_public_ip.example.id
   }
 }
 
@@ -51,7 +51,7 @@ resource "azurerm_linux_virtual_machine" "example" {
   admin_ssh_key {
     username   = "adminuser"
     # public_key = var.admin_ssh_key
-    public_key = file("")
+    public_key = file("/home/ravikishans/.ssh/id_rsa.pub")
   }
 
   os_disk {
@@ -70,5 +70,6 @@ resource "azurerm_linux_virtual_machine" "example" {
 
 output "public_ip" {
   description = "vm public ip"
-  value = azurerm_public_ip.example.ip_address
+  # value = azurerm_public_ip.example.ip_address
+  value = azurerm_linux_virtual_machine.example.public_ip_address
 }

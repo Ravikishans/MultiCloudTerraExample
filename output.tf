@@ -27,3 +27,8 @@ output "cloudfront_status" {
   description = "The current status of the CloudFront distribution"
   value       = module.aws.cloudfront_status
 }
+
+output "public_ip" {
+  description = "vm public ip"
+  value = module.azure.public_ip
+}

@@ -14,6 +14,6 @@ variable "location" {
 #   default = "default"
 # }
 
-variable "admin_ssh_key" {
-  default = "raviAzureHero.pem"
-}
+# variable "admin_ssh_key" {
+#   default = "raviAzureHero.pem"
+# }
